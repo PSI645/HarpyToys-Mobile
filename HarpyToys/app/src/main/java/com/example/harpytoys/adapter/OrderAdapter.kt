@@ -1,0 +1,37 @@
+package com.harpytoys.adapter
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.harpytoys.R
+import com.harpytoys.model.Order
+
+class OrderAdapter(
+    private var orders: List<Order>
+) : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
+
+    inner class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvOrderId: TextView = itemView.findViewById(R.id.tvProductName)
+        val tvOrderDate: TextView = itemView.findViewById(R.id.tvOrderDate)
+        val tvOrderTotal: TextView = itemView.findViewById(R.id.tvOrderPrice)
+        val tvOrderStatus: TextView = itemView.findViewById(R.id.tvOrderStatus)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_order, parent, false)
+        return OrderViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
+        val order = orders[position]
+        holder.tvOrderId.text = "Pedido #${order.id}"
+        holder.tvOrderDate.text = order.createdAt.take(10)
+        holder.tvOrderTotal.text = "R$ %.2f".format(order.total)
+        holder.tvOrderStatus.text = order.status
+    }
+
+    override fun getItemCount() = orders.size
+}
