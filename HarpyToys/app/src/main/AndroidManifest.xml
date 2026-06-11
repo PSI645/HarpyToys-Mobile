@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.harpytoys">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:label="HarpyToys"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@style/Theme.Material3.DayNight.NoActionBar">
+
+
+        <!-- Home é a tela de entrada -->
+        <activity
+            android:name=".activities.HomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activities.LoginActivity"
+            android:exported="false" />
+
+        <activity android:name=".activities.RegisterActivity"
+            android:exported="false" />
+
+        <activity android:name=".activities.CartActivity"
+            android:exported="false" />
+
+        <activity android:name=".activities.ProfileActivity"
+            android:exported="false" />
+
+        <activity android:name=".activities.OrdersActivity"
+            android:exported="false" />
+
+    </application>
+
+</manifest>
