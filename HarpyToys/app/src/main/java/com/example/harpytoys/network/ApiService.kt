@@ -55,4 +55,10 @@ interface ApiService {
         @Path("id") id: Long,
         @Body body: Map<String, String>
     ): Response<User>
+
+    @POST("orders/{userId}/checkout")
+    suspend fun checkout(
+        @Path("userId") userId: Long,
+        @Body body: Map<String, String>
+    ): Response<Order>
 }

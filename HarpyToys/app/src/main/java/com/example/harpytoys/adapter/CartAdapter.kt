@@ -43,4 +43,6 @@ class CartAdapter(
     }
 
     fun getTotal(): Double = items.sumOf { it.product.price * it.quantity }
+
+    fun getDescription(): String = items.joinToString(", ") { it.product.name }
 }

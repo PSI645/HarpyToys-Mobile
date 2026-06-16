@@ -26,5 +26,6 @@ data class Order(
     val total: Double,
     val status: String,
     val createdAt: String,
-    val description: String
+    val description: String,
+    val imageUrl: String?
 )

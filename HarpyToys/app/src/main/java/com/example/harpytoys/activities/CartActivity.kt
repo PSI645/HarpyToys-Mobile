@@ -1,5 +1,6 @@
 package com.harpytoys.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -90,36 +91,11 @@ class CartActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    val response = RetrofitClient.apiService.checkout(sessionManager.getUserId())
-                    withContext(Dispatchers.Main) {
-                        if (response.isSuccessful) {
-                            Toast.makeText(
-                                this@CartActivity,
-                                "Pedido realizado com sucesso!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            cartAdapter.updateItems(emptyList())
-                            tvTotal.text = "R$ 0,00"
-                        } else {
-                            Toast.makeText(
-                                this@CartActivity,
-                                "Erro ao finalizar pedido",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(
-                            this@CartActivity,
-                            "Erro de conexão",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+            val intent = Intent(this, CheckoutActivity::class.java).apply {
+                putExtra("total", cartAdapter.getTotal())
+                putExtra("description", cartAdapter.getDescription())
             }
+            startActivity(intent)
         }
     }
 }
